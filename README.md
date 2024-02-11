@@ -35,15 +35,15 @@ Die Webanwendung ist auf Deutsch und Englisch verfügbar, weitere Sprachen könn
         - `COLLATE utf8mb4_bin` 
     2. [`db.sql`](https://github.com/meitinger/Lagerverwaltung/blob/main/db.sql) importieren.
 3. Projekt mittels `npm run build` erstellen.
-4. `build`-Ordner auf dem Webspace bereitstellen.
-5. `config.php` anpassen:
+4. Inhalt des `build`-Ordners auf dem Webspace bereitstellen.
+5. `config.php` am Webspace anpassen:
     1. Unter `db` die MySQL-Datenbank Zugangsdaten eintragen.
     2. Unter `auth` die Microsoft Entra Tenant-ID und Anwendungs-Client-ID eintragen.
     3. Unter `api` die Pfade anpassen und den ready2order Account Token eintragen.
-    4. Unter `webhook` die Pfade anpassen und eine zufällig generierte Zeichenfolge als `secret` eintragen.
-    5. Unter `defaults` die Standardeinstellungen für neue Produkte eintragen.
+    4. Unter `webhook` die Pfade anpassen und eine lange, zufällig generierte Zeichenfolge (nur Zahlen und Buchstaben, keine Sonderzeichen) als `secret` eintragen.
+    5. Unter `defaults` die Standardeinstellungen für neue Produkte eintragen. (Mögliche Werte können in der ready2order [API Dokumentation](https://ready2order.com/api/doc#tag/Product) nachgeschlagen werden.)
 6. Die vollständige Webhook-URL aufrufen:
-    1. Beispiel: Wenn das `secret` im Punkt 5.4. auf `"123"` gesetzt wurde, dann `https://example.org/path/to/webhook.php?123` aufrufen.
+    1. Beipiel: Wenn `secret` unter `webhook` in `config.php` auf `"123"` gesetzt wurde, dann `https://example.org/path/to/webhook.php?123` aufrufen.
     2. Überprüfen ob folgende Events aktiviert wurden:
         - `product.created`
         - `product.updated`
@@ -53,5 +53,5 @@ Die Webanwendung ist auf Deutsch und Englisch verfügbar, weitere Sprachen könn
         - `productGroup.deleted`
 7. Die Anwendung aufrufen und als Verwaltungsperson anmelden.
     1. Im Datenbankmenü den Punkt *Server-Datenbank mit ready2order synchronisieren* wählen.
-    2. Unter *Berechtigungen* den User Berechtigungen zu den Produktgruppen zuweisen.
-    3. Unter *Lagerübersicht* neue Lager und erstellen und den User Berechtigungen zuweisen.
+    2. Unter *Berechtigungen* den Usern Berechtigungen zu den Produktgruppen zuweisen.
+    3. Unter *Lagerübersicht* neue Lager erstellen und den Usern Berechtigungen zuweisen.
