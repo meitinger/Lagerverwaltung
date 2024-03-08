@@ -254,7 +254,7 @@ function product(): never
 	[$uri, $body] = $query->fetch_array();
 	$data = db_decode($body);
 	if ($method === 'PUT') {
-		$data = array_merge(get_config_array('api.defaultProduct'), $data);
+		$data = array_merge(get_config_array('defaults'), $data);
 	}
 	$lock = new Lock(get_config_string('webhook.lockFile'));
 	try {
