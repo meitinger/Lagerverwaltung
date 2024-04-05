@@ -142,7 +142,7 @@ export const BarcodeInput: React.FC<{
   }, [setValue]);
   const change = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>): void => {
-      const value = event.currentTarget.value.trim();
+      const value = event.currentTarget.value;
       // the field is required, since product_barcode cannot be unset via API
       setValue(value.length === 0 ? null : value);
     },
@@ -182,7 +182,7 @@ export const NumberInput: React.FC<{
   const hasPermission = useFormPermission(name);
   const change = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>): void => {
-      const value = parseFloat(event.currentTarget.value.trim());
+      const value = parseFloat(event.currentTarget.value);
       setValue(Number.isNaN(value) ? null : value);
     },
     [setValue]
@@ -390,7 +390,7 @@ export const TextInput: React.FC<{
   const hasPermission = useFormPermission(name);
   const change = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>): void => {
-      const value = event.currentTarget.value.trim();
+      const value = event.currentTarget.value;
       setValue(value.length === 0 ? null : value);
     },
     [setValue]
