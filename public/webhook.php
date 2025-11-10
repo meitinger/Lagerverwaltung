@@ -67,12 +67,13 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 	exit(1);
 }
 
-if (!isset($_POST['resource']) || !is_array($_POST['resource'])) {
+$payload = json_decode(file_get_contents('php://input'), associative: true);
+if (!isset($payload['resource']) || !is_array($payload['resource'])) {
 	http_response_code(400);
 	exit(1);
 }
 
-$resource = $_POST['resource'];
+$resource = $payload['resource'];
 foreach ($resource as $key => &$value) {
 	if ($value === 'null') {
 		$value = null;
@@ -80,7 +81,7 @@ foreach ($resource as $key => &$value) {
 		$value = true;
 	} elseif ($value === 'false') {
 		$value = false;
-	} elseif (is_numeric($value)) {
+	} elseif (is_string($value) && is_numeric($value)) {
 		$number = str_contains($value, '.') ? floatval($value) : intval($value);
 		if (strval($number) === $value) {
 			$value = $number;
